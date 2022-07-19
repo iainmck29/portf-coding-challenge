@@ -15,6 +15,7 @@ We aren't too fussed about styling for this exercise, but it would be ideal to g
 - Consider how this may be expanded in the future, and which components may be re-usable as the application grows.
 - We prefer to utilise functional React with Hooks, over class-based React, however, this is not a dealbreaker.
 - You do not need to build a date-picker yourself, there are many open source ones available!
+- Don't just commit all your work in one go, do lots of small commits!
 
 ## Assumptions
 
