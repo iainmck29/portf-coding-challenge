@@ -1,0 +1,7 @@
+.container {
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+    max-width: 500px;
+}
