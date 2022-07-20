@@ -4,14 +4,15 @@ import Container from "react-bootstrap/Container"
 import apiAxios from "../../config/axiosConfig";
 
 export const DataContainer = () => {
-    const [beers, setBeers] = useState<AxiosResponse | null | void>(null)
+    const [beers, setBeers] = useState('')
     const [hasError, setHasError] = useState(false);
 
     const getBeers = async () => {
         try {
             const data = await apiAxios.get('/');
-            setBeers(data);
-            // console.log(data)
+            const jsonData = JSON.stringify(data, null, 2)
+            setBeers(jsonData)
+            console.log(data)
         } catch (error) {
             setHasError(true);
         }
@@ -32,7 +33,10 @@ export const DataContainer = () => {
 
     return (
         <Container>
-
+            <pre style={{textAlign:"left"}}>
+            {beers}
+            </pre>
+            {/* <NivoResponsiveBar data={data} /> */}
         </Container>
     )
 }
