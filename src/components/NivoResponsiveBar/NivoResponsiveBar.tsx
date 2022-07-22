@@ -1,9 +1,6 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar"
 
-interface NivoPropType {
-    data: any[]
-}
 
 export const NivoResponsiveBar = ({data}: any) => {
     return (
@@ -23,9 +20,17 @@ export const NivoResponsiveBar = ({data}: any) => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "brewDate",
+          legend: "Amount First Brewed Per Month",
           legendPosition: "middle",
           legendOffset: -40
+        }}
+        axisBottom={{
+          tickSize: 5,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "Month",
+          legendPosition: "middle",
+          legendOffset: 40
         }}
       />
 )

@@ -9,26 +9,19 @@ import { formatDate } from "../helper"
 
 interface DataContainerProps {
     startDate: Date,
-    endDate: Date
+    endDate: Date,
+    abv?: number
 }
 
-export const DataContainer = ({startDate, endDate}: DataContainerProps) => {
+export const DataContainer = ({startDate, endDate, abv}: DataContainerProps) => {
     const formattedStart = formatDate(startDate)
     const formattedEnd = formatDate(endDate)
-
-    console.log(formattedStart, formattedEnd)
-
-    const {isLoading, error, beers} = useGetBeerData(formattedStart, formattedEnd);
-
-    // useEffect(() => {
-    //     console.log(beersSum);
-    // })
-
+    const {isLoading, error, beers} = useGetBeerData(formattedStart, formattedEnd, abv);
 
 
     if (error) {
         return (
-            <Container>
+            <Container className="mt-5">
                 <h1>Error loading data</h1>
             </Container>
         )
@@ -36,14 +29,13 @@ export const DataContainer = ({startDate, endDate}: DataContainerProps) => {
 
     if (isLoading) {
         return (
-        <Spinner animation="border" role="status">
+        <Spinner animation="border" role="status" className="mt-5">
             <span className="visually-hidden">Loading...</span>
           </Spinner>
         )
     } else {
         return (
-        <Container className="border mt-3" style={{height: "1000px"}}>
-            {/* <pre style={{textAlign: "left"}}>{JSON.stringify(beers, null, 2)}</pre> */}
+        <Container className="border mt-3 bg-light" style={{height: "1000px"}}>
             <NivoResponsiveBar
             data={beers}
             />

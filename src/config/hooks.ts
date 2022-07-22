@@ -3,20 +3,34 @@ import { useState, useEffect } from "react";
 import apiAxios from "./axiosConfig";
 
 
-export const useGetBeerData = (startDate: string, endDate: string) => {
+export const useGetBeerData = (startDate: string, endDate: string, abv?: number) => {
     const [beers, setBeers] = useState<any>([])
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(false);
 
+    useEffect(() => {
+        getBeers();
+    }, [startDate, endDate, abv])
 
     const getBeers = async () => {
         try {
-            apiAxios.get(`?brewed_after=${startDate}&brewed_before=${endDate}`) 
-            .then(({data}) => {
-                const formattedBeers = sumBeers(data)
+            //@ts-ignore
+            let response = null, page = 1, results = [];
+            do {
+                let url = `?brewed_after=${startDate}&brewed_before=${endDate}`
+                if (abv) {
+                    url += `&abv_gt=${abv}`
+                }
+                url += `&per_page=80&page=${page++}`
+                response = await apiAxios.get(url)
+                //@ts-ignore
+                results = results.concat(response.data)
+            } while (response.data.length !== 0)
+                //@ts-ignore
+                const formattedBeers = sumBeers(results)
                 setBeers(formattedBeers)
                 setIsLoading(false)
-            })
+
         } catch (error) {
             setError(true)
             return

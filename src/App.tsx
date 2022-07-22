@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 function App() {
   const [startDate, setStartDate] = useState(new Date(2011, 0));
   const [endDate, setEndDate] = useState(new Date());
+  const [ABV, setABV] = useState(0.0);
 
   const handleChangeStartDate = (date: Date) => {
     setStartDate(date);
@@ -16,6 +17,10 @@ function App() {
     setEndDate(date)
   }
 
+  const handleChangeABV = (abv: string) => {
+    setABV(parseInt(abv))
+  }
+
   return (
     <div className="App">
       <HeaderContainer
@@ -23,10 +28,12 @@ function App() {
       onChangeEnd={handleChangeEndDate}
       startDate={startDate}
       endDate={endDate}
+      onChangeABV={handleChangeABV}
       />
       <DataContainer 
       startDate={startDate}
       endDate={endDate}
+      abv={ABV}
       />
     </div>
   );
